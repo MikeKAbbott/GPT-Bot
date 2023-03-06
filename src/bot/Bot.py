@@ -55,7 +55,7 @@ class Bot():
     self.bot.run(os.getenv('TOKEN'))
   
   @tasks.loop(seconds = 5)
-  async def change_status(self):
+  async def change_status(self) -> None:
     await self.bot.change_presence(
       activity = discord.Game(next(self.bot.statuses))
     )
