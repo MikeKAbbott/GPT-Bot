@@ -17,7 +17,7 @@ class Bot():
     'HelpCommand',
     'ResetCommand',
   ]
-  
+
   _help_commands: list = [
     {
       'title': '#chat [your message here]',
@@ -32,7 +32,7 @@ class Bot():
   _bot_methods: list = [
     'change_status',
   ]
-  
+
   _bot_statuses: cycle = cycle([
     'Type "#chat help" for help',
     'Type "#chat [Your message here] to start the conversation',
@@ -68,7 +68,7 @@ class Bot():
 
     self.bot.help_commands: list = self._help_commands
     self.bot.statuses: list = self._bot_statuses
-  
+
   def _load_cogs(self) -> None:
     for ext in self._extensions:
       try:
