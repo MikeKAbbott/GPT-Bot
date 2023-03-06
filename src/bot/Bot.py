@@ -10,6 +10,7 @@ from itertools import cycle
 load_dotenv()
 
 class Bot():
+
   _extensions: list = [
     'Events',
     'ChatCommand',
@@ -19,12 +20,12 @@ class Bot():
   
   _help_commands: list = [
     {
-      'name': '#chat [your message here]',
-      'value': 'Initiates a conversation with the bot', 
+      'title': '#chat [your message here]',
+      'content': 'Initiates a conversation with the bot', 
     },
     {
-      'name': '#chat Clear',
-      'value': 'Resets the conversation',
+      'title': '#chat Clear',
+      'content': 'Resets the conversation',
     },
   ]
 

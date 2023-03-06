@@ -1,33 +1,29 @@
 import openai
 import os
 
-from openai.openai_object import OpenAIObject
 from dotenv import load_dotenv
+from openai.openai_object import OpenAIObject
 from utils.Sanitize import sanitize
 
-load_dotenv()
-openai.api_key = os.getenv('OPENAI_API_KEY')
-
 class ChatGPT:
-  
+
   __model: str = 'gpt-3.5-turbo'
-  
+
   __messages: list = [{
-      'role': 'system',
-      'content': 'You are a helpful assistant.',
-    }]
+    'role': 'system',
+    'content': 'You are a helpful assistant.',
+  }]
 
   def __init__(self):
-    pass
+    load_dotenv()
+    openai.api_key = os.getenv('OPENAI_API_KEY')
 
-  @classmethod
   def add_message(self, role: str, message: str) -> None:
     self.__messages.append({
       'role': role,
       'content': sanitize(message),      
     })
   
-  @classmethod
   def chat(self, user_message: str) -> str:
     try:
       self.add_message('user', user_message)
@@ -45,8 +41,7 @@ class ChatGPT:
     except Exception as e:
       print(e)
       return 'Sorry, something when wrong. Could you repeat that?'
-  
-  @classmethod
+
   def clear_messages(self) -> None:
     self.__messages = [{
       'role': 'system',

@@ -1,8 +1,9 @@
 import discord
-from discord import Embed
+
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.message import Message
+from utils.CreateDiscordEmbed import DiscordEmbed
 
 class HelpCommand(commands.Cog):
 
@@ -11,26 +12,23 @@ class HelpCommand(commands.Cog):
 
   @commands.command(aliases=['#chat help'])
   async def help(self, ctx: Message) -> None:
-    help_embed: Embed = Embed(
+    help_embed: DiscordEmbed = DiscordEmbed(
       title = 'Help Desk for Chit Chat Bot',
       description = 'All commands for the chit chat bot.',
       color = discord.Color.random()
+    ).set_author(
+      author = 'Chit-Chat-Bot'
+    ).set_footer(
+      content = f'Requested by @{ctx.author}.'
     )
-
-    help_embed.set_author(name = 'Chit Chat')
 
     for command in self.bot.help_commands:
-      help_embed.add_field(
-        name = command.get('name'),
-        value = command.get('value'),
-        inline = False,
-      )
-
-    help_embed.set_footer(
-      text = f'Requested by @{ctx.author}.',
+      help_embed.add_content(
+        title = command.get('title'),
+        content = command.get('content'),
     )
 
-    await ctx.channel.send(embed = help_embed)
+    await ctx.channel.send(embed = help_embed.embed)
 
 def setup(bot: Bot) -> None:
   bot.add_cog(HelpCommand(bot))

@@ -3,6 +3,7 @@ from discord.ext.commands.bot import Bot
 from discord.message import Message
 
 class ResetCommand(commands.Cog):
+
   def __init__(self, bot):
     self.bot: Bot = bot
 

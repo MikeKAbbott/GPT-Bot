@@ -1,11 +1,19 @@
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.message import Message
+from discord.ext.commands import CommandNotFound
 
 class Events(commands.Cog):
 
     def __init__(self, bot: Bot):
       self.bot: Bot = bot
+
+    @commands.Cog.listener()
+    async def on_command_error(self, _, error):
+      if isinstance(error, CommandNotFound):
+        return
+
+      raise error
 
     @commands.Cog.listener()
     async def on_ready(self) -> None:
