@@ -1,4 +1,4 @@
-#chit-chat-bot
+#GPT-bot
 
 > A discord bot allowing users to interact with OpenAI's ChatGPT API
 

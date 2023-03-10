@@ -27,7 +27,7 @@ class Events(commands.Cog):
         self.bot.commands
       )
 
-      if ctx.content[6:] not in command_names:
+      if ctx.content[5:] not in command_names:
         await self.bot.get_command('chat')(ctx)
 
 def setup(bot: Bot) -> None:

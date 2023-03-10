@@ -10,7 +10,7 @@ class HelpCommand(commands.Cog):
   def __init__(self, bot: Bot):
     self.bot: Bot = bot
 
-  @commands.command(aliases=['#chat help'])
+  @commands.command(aliases=['#gpt help'])
   async def help(self, ctx: Message) -> None:
     help_embed: DiscordEmbed = DiscordEmbed(
       title = 'Help Desk for Chit Chat Bot',

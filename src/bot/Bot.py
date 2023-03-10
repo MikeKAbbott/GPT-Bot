@@ -41,7 +41,7 @@ class Bot():
 
   def __init__(self):
     self.bot: Bot = commands.Bot(
-      command_prefix = '#chat ',
+      command_prefix = '#gpt ',
       intent = discord.Intents.all(),
       help_command = None
     )
