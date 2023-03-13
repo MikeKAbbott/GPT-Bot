@@ -15,7 +15,7 @@ class ChatGPT:
 
   def __init__(self):
     openai.api_key = os.getenv('OPENAI_API_KEY')
-    self.messages = self._base_messages
+    self.reset_messages()
 
   def _add_message(self, role: str, message: str) -> None:
     self.messages.append({
@@ -41,7 +41,8 @@ class ChatGPT:
       }
 
     except Exception as e:
-      print(e)
+      print(f'error: {e}')
+
       return {
         'content': 'Sorry, something when wrong. Could you repeat that?',
         'status': 404,

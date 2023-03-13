@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class TestChatGPT(unittest.TestCase):
+
   gpt: ChatGPT = ChatGPT()
   
   def test_authorization(self):

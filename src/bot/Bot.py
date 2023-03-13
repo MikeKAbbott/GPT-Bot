@@ -46,12 +46,8 @@ class Bot(commands.Bot):
     self.remove_command('help')
     self._load_cogs()
 
-  def run_bot(self) -> None:
+  def start_client(self) -> None:
     self.run(os.getenv('TOKEN'))
-
-  def _add_methods(self) -> None:
-    for method in self._bot_methods:
-      self.methods[method] = eval(f'self.{method}')
 
   def _load_cogs(self) -> None:
     for ext in self._extensions:
