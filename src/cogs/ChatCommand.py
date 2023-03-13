@@ -1,10 +1,10 @@
 import asyncio
 import discord
 
+from discord import Embed
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.message import Message
-from src.utils.CreateDiscordEmbed import DiscordEmbed
 from src.utils.IsEmptyString import is_empty_string
 from queue import Queue
 
@@ -43,18 +43,15 @@ class ChatCommand(commands.Cog):
           gpt_message = self.bot.chatGPT.chat(user_message)['content']
           await asyncio.sleep(2)
 
-        chat_embed: DiscordEmbed = DiscordEmbed(
+        chat_embed: Embed = Embed(
           description= f'{ctx.author.mention}',
           color = discord.Color.random()
-        ).add_content(
-          title = 'User Message',
-          content = user_message,
-        ).add_content(
-          title = 'ChatGPT Response',
-          content = gpt_message,
         )
 
-        await ctx.channel.send(embed = chat_embed.embed)
+        chat_embed.add_content('User Message', user_message)
+        chat_embed.add_content('ChatGPT Response', gpt_message)
+
+        await ctx.channel.send(embed = chat_embed)
 
         self._user_messages.task_done()
 

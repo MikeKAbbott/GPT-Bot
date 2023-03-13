@@ -47,5 +47,5 @@ class ChatGPT:
         'status': 404,
       }
 
-  def clear_messages(self) -> None:
+  def reset_messages(self) -> None:
     self._messages = self._base_messages

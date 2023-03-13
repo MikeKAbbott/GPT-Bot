@@ -2,8 +2,7 @@ import discord
 import os
 
 from src.api.ChatGPT import ChatGPT
-from discord.ext import commands, tasks
-from discord.ext.commands.bot import Bot
+from discord.ext import commands
 from dotenv import load_dotenv
 from itertools import cycle
 
@@ -20,12 +19,12 @@ class Bot(commands.Bot):
 
   help_commands: list = [
     {
-      'title': '#chat [your message here]',
-      'content': 'Initiates a conversation with the bot', 
+      'name': '#chat [your message here]',
+      'value': 'Initiates a conversation with the bot', 
     },
     {
-      'title': '#chat Clear',
-      'content': 'Resets the conversation',
+      'name': '#chat Clear',
+      'value': 'Resets the conversation',
     },
   ]
 

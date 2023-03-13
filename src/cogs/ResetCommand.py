@@ -9,7 +9,7 @@ class ResetCommand(commands.Cog):
 
   @commands.command(aliases=['#gpt reset'])
   async def reset(self, ctx: Message) -> None:
-    self.bot.chatGPT.clear_messages()
+    self.bot.chatGPT.reset_messages()
 
     await ctx.channel.send(
       f'<@{ctx.author.id}>\n\nThe conversation has been reset.'

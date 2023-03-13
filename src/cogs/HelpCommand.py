@@ -1,9 +1,9 @@
 import discord
 
+from discord import Embed
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.message import Message
-from src.utils.CreateDiscordEmbed import DiscordEmbed
 
 class HelpCommand(commands.Cog):
 
@@ -12,23 +12,22 @@ class HelpCommand(commands.Cog):
 
   @commands.command(aliases=['#gpt help'])
   async def help(self, ctx: Message) -> None:
-    help_embed: DiscordEmbed = DiscordEmbed(
+    help_embed: Embed = Embed(
       title = 'Help Desk for Chit Chat Bot',
       description = 'All commands for the chit chat bot.',
       color = discord.Color.random()
-    ).set_author(
-      author = 'Chit-Chat-Bot'
-    ).set_footer(
-      content = f'Requested by @{ctx.author}.'
     )
+
+    help_embed.set_author('Chit-Chat-Bo')
+    help_embed.set_footer(f'Requested by @{ctx.author}.')
 
     for command in self.bot.help_commands:
       help_embed.add_content(
-        title = command.get('title'),
-        content = command.get('content'),
+        command.get('name'),
+        command.get('value'),
     )
 
-    await ctx.channel.send(embed = help_embed.embed)
+    await ctx.channel.send(embed = help_embed)
 
 def setup(bot: Bot) -> None:
   bot.add_cog(HelpCommand(bot))
