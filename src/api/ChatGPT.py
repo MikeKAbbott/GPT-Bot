@@ -15,10 +15,10 @@ class ChatGPT:
 
   def __init__(self):
     openai.api_key = os.getenv('OPENAI_API_KEY')
-    self._messages = self._base_messages
+    self.messages = self._base_messages
 
   def _add_message(self, role: str, message: str) -> None:
-    self._messages.append({
+    self.messages.append({
       'role': role,
       'content': sanitize(message),      
     })
@@ -29,7 +29,7 @@ class ChatGPT:
 
       response: OpenAIObject = openai.ChatCompletion.create(
         model = self._model,
-        messages = self._messages
+        messages = self.messages
       )
 
       gpt_message: str = sanitize(response.get('choices')[0].message.content)
@@ -48,4 +48,5 @@ class ChatGPT:
       }
 
   def reset_messages(self) -> None:
-    self._messages = self._base_messages
+    self.messages = self._base_messages
+    return self
