@@ -4,8 +4,8 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.message import Message
-from utils.CreateDiscordEmbed import DiscordEmbed
-from utils.IsEmptyString import is_empty_string
+from src.utils.CreateDiscordEmbed import DiscordEmbed
+from src.utils.IsEmptyString import is_empty_string
 from queue import Queue
 
 class ChatCommand(commands.Cog):
@@ -40,7 +40,7 @@ class ChatCommand(commands.Cog):
         user_message: str = self._user_messages.get()
 
         async with ctx.channel.typing():
-          gpt_message = self.bot.chatGPT.chat(user_message)
+          gpt_message = self.bot.chatGPT.chat(user_message).content
           await asyncio.sleep(2)
           
         chat_embed: DiscordEmbed = DiscordEmbed(

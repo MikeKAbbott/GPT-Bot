@@ -4,4 +4,5 @@
 
 ## Setup
 1. Create and fill out `.env` based on `.env.example`
+2. Run `pip install .`
 2. Run the `main.py` file

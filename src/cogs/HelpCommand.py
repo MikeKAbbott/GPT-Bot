@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands.bot import Bot
 from discord.message import Message
-from utils.CreateDiscordEmbed import DiscordEmbed
+from src.utils.CreateDiscordEmbed import DiscordEmbed
 
 class HelpCommand(commands.Cog):
 

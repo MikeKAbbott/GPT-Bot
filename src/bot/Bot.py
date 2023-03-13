@@ -1,7 +1,7 @@
 import discord
 import os
 
-from api.ChatGPT import ChatGPT
+from src.api.ChatGPT import ChatGPT
 from discord.ext import commands, tasks
 from discord.ext.commands.bot import Bot
 from dotenv import load_dotenv
@@ -72,7 +72,7 @@ class Bot():
   def _load_cogs(self) -> None:
     for ext in self._extensions:
       try:
-        self.bot.load_extension(f'cogs.{ext}')
+        self.bot.load_extension(f'src.cogs.{ext}')
       except Exception as e:
         print(f'Failed to load extension {ext}.')
         print(e)
