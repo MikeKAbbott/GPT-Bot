@@ -9,7 +9,7 @@ from itertools import cycle
 
 load_dotenv()
 
-class Bot():
+class Bot(commands.Bot):
 
   _extensions: list = [
     'Events',
@@ -18,7 +18,7 @@ class Bot():
     'ResetCommand',
   ]
 
-  _help_commands: list = [
+  help_commands: list = [
     {
       'title': '#chat [your message here]',
       'content': 'Initiates a conversation with the bot', 
@@ -29,50 +29,35 @@ class Bot():
     },
   ]
 
-  _bot_methods: list = [
-    'change_status',
-  ]
-
-  _bot_statuses: cycle = cycle([
+  statuses: cycle = cycle([
     'Type "#chat help" for help',
     'Type "#chat [Your message here] to start the conversation',
     'Type "#chat reset" to reset the conversation',
   ])
 
   def __init__(self):
-    self.bot: Bot = commands.Bot(
+    super().__init__(
       command_prefix = '#gpt ',
       intent = discord.Intents.all(),
       help_command = None
     )
 
-    self.bot.remove_command('help')
-    self.bot.chatGPT: ChatGPT = ChatGPT()
+    self.chatGPT: ChatGPT = ChatGPT()
 
-    self._add_attributes()
+    self.remove_command('help')
     self._load_cogs()
 
-    self.bot.run(os.getenv('TOKEN'))
-  
-  @tasks.loop(seconds = 5)
-  async def change_status(self) -> None:
-    await self.bot.change_presence(
-      activity = discord.Game(next(self.bot.statuses))
-    )
+  def run_bot(self) -> None:
+    self.run(os.getenv('TOKEN'))
 
-  def _add_attributes(self) -> None:
-    self.bot.methods: dict = {}
-
+  def _add_methods(self) -> None:
     for method in self._bot_methods:
-      self.bot.methods[method] = eval(f'self.{method}')
-
-    self.bot.help_commands: list = self._help_commands
-    self.bot.statuses: list = self._bot_statuses
+      self.methods[method] = eval(f'self.{method}')
 
   def _load_cogs(self) -> None:
     for ext in self._extensions:
       try:
-        self.bot.load_extension(f'src.cogs.{ext}')
+        self.load_extension(f'src.cogs.{ext}')
+
       except Exception as e:
         print(f'Failed to load extension {ext}.')
-        print(e)

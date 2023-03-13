@@ -40,9 +40,9 @@ class ChatCommand(commands.Cog):
         user_message: str = self._user_messages.get()
 
         async with ctx.channel.typing():
-          gpt_message = self.bot.chatGPT.chat(user_message).content
+          gpt_message = self.bot.chatGPT.chat(user_message)['content']
           await asyncio.sleep(2)
-          
+
         chat_embed: DiscordEmbed = DiscordEmbed(
           description= f'{ctx.author.mention}',
           color = discord.Color.random()

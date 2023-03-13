@@ -1,4 +1,6 @@
-from discord.ext import commands
+import discord
+
+from discord.ext import commands, tasks
 from discord.ext.commands.bot import Bot
 from discord.message import Message
 from discord.ext.commands import CommandNotFound
@@ -7,6 +9,12 @@ class Events(commands.Cog):
 
     def __init__(self, bot: Bot):
       self.bot: Bot = bot
+
+    @tasks.loop(seconds = 5)
+    async def change_status(self) -> None:
+      await self.bot.change_presence(
+        activity = discord.Game(next(self.bot.statuses))
+      )
 
     @commands.Cog.listener()
     async def on_command_error(self, _, error):
@@ -17,7 +25,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self) -> None:
-      self.bot.methods['change_status'].start()
+      self.change_status.start()
       print('We have logged in as {0.user}'.format(self.bot))
 
     @commands.Cog.listener()
