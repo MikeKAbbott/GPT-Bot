@@ -4,7 +4,7 @@ from discord.message import Message
 
 class ResetCommand(commands.Cog):
 
-  def __init__(self, bot):
+  def __init__(self, bot: Bot):
     self.bot: Bot = bot
 
   @commands.command(aliases=['#gpt reset'])

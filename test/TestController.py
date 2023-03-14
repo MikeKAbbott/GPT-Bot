@@ -9,7 +9,7 @@ TEST_MODULES: list = [
   TestUtils,
 ]
 
-def suite():
+def suite() -> TestSuite:
   suite: TestSuite = unittest.TestSuite()
 
   for module in TEST_MODULES:
@@ -18,7 +18,4 @@ def suite():
   return suite
 
 if __name__ == '__main__':
-  unittest.main(
-    defaultTest='suite',
-    verbosity = 2,
-  )
+  unittest.main(defaultTest='suite', verbosity = 2)

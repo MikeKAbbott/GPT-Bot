@@ -1,9 +1,9 @@
 import unittest
 
-from unittest import TestSuite
+from dotenv import load_dotenv
 from src.utils.IsEmptyString import is_empty_string
 from src.utils.Sanitize import sanitize
-from dotenv import load_dotenv
+from unittest import TestSuite
 
 load_dotenv()
 

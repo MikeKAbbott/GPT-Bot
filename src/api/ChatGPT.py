@@ -1,11 +1,11 @@
 import openai
 import os
 
-from dotenv import load_dotenv
 from openai.openai_object import OpenAIObject
 from src.utils.Sanitize import sanitize
 
 class ChatGPT:
+
   _model: str = 'gpt-3.5-turbo'
 
   def __init__(self):

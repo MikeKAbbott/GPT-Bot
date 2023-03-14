@@ -37,17 +37,17 @@ class Bot(commands.Bot):
   def __init__(self):
     super().__init__(
       command_prefix = '#gpt ',
+      help_command = None,
       intent = discord.Intents.all(),
-      help_command = None
     )
 
-    self.chatGPT: ChatGPT = ChatGPT()
-
     self.remove_command('help')
+
+    self.chatGPT: ChatGPT = ChatGPT()
     self._load_cogs()
 
   def start_client(self) -> None:
-    self.run(os.getenv('TOKEN'))
+    self.run(os.getenv('DISCORD_TOKEN'))
 
   def _load_cogs(self) -> None:
     for ext in self._extensions:
