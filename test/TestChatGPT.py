@@ -1,8 +1,7 @@
 import unittest
 
-from src.api.ChatGPT import ChatGPT
-from src.bot.Bot import Bot
 from dotenv import load_dotenv
+from src.api.ChatGPT import ChatGPT
 
 load_dotenv()
 
