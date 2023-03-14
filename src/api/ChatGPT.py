@@ -6,16 +6,11 @@ from openai.openai_object import OpenAIObject
 from src.utils.Sanitize import sanitize
 
 class ChatGPT:
-  _base_messages: list = [{
-    'role': 'system',
-    'content': 'You are a helpful assistant.',
-  }]
-
   _model: str = 'gpt-3.5-turbo'
 
   def __init__(self):
     openai.api_key = os.getenv('OPENAI_API_KEY')
-    self.reset_messages()
+    self.reset()
 
   def _add_message(self, role: str, message: str) -> None:
     self.messages.append({
@@ -35,7 +30,7 @@ class ChatGPT:
       gpt_message: str = sanitize(response.get('choices')[0].message.content)
       self._add_message('assistant', gpt_message)
 
-      return { 
+      return {
         'content': gpt_message,
         'status': 200,
       }
@@ -48,6 +43,8 @@ class ChatGPT:
         'status': 404,
       }
 
-  def reset_messages(self) -> None:
-    self.messages = self._base_messages
-    return self
+  def reset(self) -> None:
+    self.messages = [{
+    'role': 'system',
+    'content': 'You are a helpful assistant.',
+  }]
