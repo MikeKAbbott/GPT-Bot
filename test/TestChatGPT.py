@@ -14,9 +14,9 @@ class TestChatGPT(unittest.TestCase):
     response: dict = self.gpt.chat('This is a test message.')
 
     self.assertEqual(
-      response['status'],
-      200,
-      'Should return a 200 status code when making a request to ChatGPT API',
+      msg = 'Should return a 200 status code when making a request to ChatGPT API',
+      first = response['status'],
+      second = 200,
     )
 
 def suite():

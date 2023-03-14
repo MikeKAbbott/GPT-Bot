@@ -15,30 +15,30 @@ class TestUtils(unittest.TestCase):
     none_string = None
 
     self.assertEqual(
-      is_empty_string(populated_string),
-      False,
-      'Should return a False when the string is not empty',
+      msg = 'Should return a False when the string is not empty',
+      first = is_empty_string(populated_string),
+      second = False,
     )
 
     self.assertEqual(
-      is_empty_string(empty_string),
-      True,
-      'Should return a True when the string is empty',
+      msg = 'Should return a True when the string is empty',
+      first = is_empty_string(empty_string),
+      second = True,
     )
 
     self.assertEqual(
-      is_empty_string(none_string),
-      True,
-      'Should return a True when the string is none',
+      msg = 'Should return a True when the string is none',
+      first = is_empty_string(none_string),
+      second = True,
     )
 
   def test_santize(self):
     test_string = ' Test Str\ning '
 
     self.assertEqual(
-      sanitize(test_string),
-      'Test String',
-      'Should return a string with removed white spaces and new lines',
+      msg = 'Should return a string with removed white spaces and new lines',
+      first = sanitize(test_string),
+      second = 'Test String',
     )
 
 def suite() -> TestSuite:
